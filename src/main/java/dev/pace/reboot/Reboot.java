@@ -3,6 +3,7 @@ package dev.pace.reboot;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -10,6 +11,15 @@ import org.bukkit.scheduler.BukkitRunnable;
 public final class Reboot extends JavaPlugin {
     public static int rebootTaskID = 0;
     public static boolean isRebooting = false;
+    public static FileConfiguration config;
+
+    @Override
+    public void onEnable() {
+        // Configuration type
+        Reboot.config = this.getConfig();
+        Reboot.config.options().copyDefaults(true);
+        this.saveConfig();
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -25,7 +35,7 @@ public final class Reboot extends JavaPlugin {
                     return false;
                 }
 
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "say Restarting in 60 seconds!");
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "say "+Reboot.config.getString("message.rebootmessage"));
                 new BukkitRunnable() {
                     int counter = 60;
 
@@ -52,7 +62,7 @@ public final class Reboot extends JavaPlugin {
                 if (isRebooting && rebootTaskID != 0) {
                     Bukkit.getScheduler().cancelTask(rebootTaskID);
                     isRebooting = false;
-                    sender.sendMessage("The reboot has been cancelled by a operator.");
+                    sender.sendMessage(Reboot.config.getString("message.cancel_message"));
                 }
             }
 
