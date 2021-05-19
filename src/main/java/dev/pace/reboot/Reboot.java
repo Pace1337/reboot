@@ -16,7 +16,7 @@ public final class Reboot extends JavaPlugin {
         if (sender instanceof Player) {
             if (cmd.getName().equalsIgnoreCase("reboot")) {
                 if (!sender.hasPermission("reboot.use")) {
-                    sender.sendMessage("&cYou have no permission to execute this command.");
+                    sender.sendMessage("You have no permission to execute this command.");
                     return true;
                 }
                 if (isRebooting) {
