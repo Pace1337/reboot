@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dev.pace</groupId>
-    <artifactId>TestCommand</artifactId>
+    <artifactId>Reboot</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>TestCommand</name>
 
-    <description>Pace's first plugin, commands!</description>
+    <description>Rebooting command for your Bukkit/Spigot server.</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

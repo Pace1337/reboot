@@ -6,3 +6,6 @@ authors: [ Pace ]
 commands:
   reboot:
     description: "Simple rebooting plugin for your server."
+  cancelreboot:
+    description: "Cancel rebooting"
+
