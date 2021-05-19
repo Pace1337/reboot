@@ -28,6 +28,7 @@ public final class Reboot extends JavaPlugin {
                 if (!sender.hasPermission("reboot.use")) {
                     sender.sendMessage("You have no permission to execute this command.");
                     return true;
+                    //  Permission check because some monkeys like me like to abuse
                 }
                 if (isRebooting) {
                     sender.sendMessage("This server is already rebooting :), use /cancelreboot to cancel the reboot.");
@@ -57,6 +58,7 @@ public final class Reboot extends JavaPlugin {
                 if (!sender.hasPermission("reboot.use")) {
                     sender.sendMessage("You have no permission to execute this command.");
                     return true;
+                    //  Permission check because some monkeys like me like to abuse
                 }
 
                 if (isRebooting && rebootTaskID != 0) {
