@@ -12,11 +12,6 @@ public final class Reboot extends JavaPlugin {
     public static boolean isRebooting = false;
 
     @Override
-    public void onEnable() {
-        Bukkit.getConsoleSender().sendMessage("Reboot Plugin loaded without any issues.");
-    }
-
-    @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
             if (cmd.getName().equalsIgnoreCase("reboot")) {
@@ -65,9 +60,4 @@ public final class Reboot extends JavaPlugin {
         return true;
     }
 
-    @Override
-    public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage("Reboot Plugin disabled.");
-
-    }
 }
