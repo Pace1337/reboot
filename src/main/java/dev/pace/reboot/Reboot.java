@@ -70,5 +70,4 @@ public final class Reboot extends JavaPlugin {
         }
         return true;
     }
-
 }
