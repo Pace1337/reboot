@@ -36,7 +36,7 @@ public final class Reboot extends JavaPlugin {
                     return false;
                 }
 
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "say "+Reboot.config.getString("message.rebootmessage"));
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "say "+Reboot.config.getString("message.reboot_message"));
                 new BukkitRunnable() {
                     int counter = 60;
 
@@ -69,5 +69,5 @@ public final class Reboot extends JavaPlugin {
             }
         }
         return true;
-    }
+    }   
 }
