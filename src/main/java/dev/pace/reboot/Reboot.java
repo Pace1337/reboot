@@ -67,7 +67,6 @@ public final class Reboot extends JavaPlugin {
                     sender.sendMessage(Reboot.config.getString("message.cancel_message"));
                 }
             }
-
         }
         return true;
     }
