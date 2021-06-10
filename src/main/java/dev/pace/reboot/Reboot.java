@@ -9,9 +9,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public final class Reboot extends JavaPlugin {
-    public static int rebootTaskID = 0;
-    public static boolean isRebooting = false;
-    public static FileConfiguration config;
+    public int rebootTaskID = 0;
+    public boolean isRebooting = false;
+    public FileConfiguration config;
 
     @Override
     public void onEnable() {
@@ -37,12 +37,12 @@ public final class Reboot extends JavaPlugin {
                 }
 
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "say "+Reboot.config.getString("message.reboot_message"));
-                new BukkitRunnable() {
+                BukkitRunnable bkt = new BukkitRunnable() {
                     int counter = 60;
 
                     public void run() {
                         isRebooting = true;
-                        rebootTaskID = this.getTaskId();
+                        
                         counter--;
                         if (counter == 50 || counter == 40 || counter == 30 || counter == 20 || counter == 10 || counter == 1) {
                             Bukkit.broadcastMessage("Server Restarting in " + counter + " seconds!");
@@ -53,7 +53,9 @@ public final class Reboot extends JavaPlugin {
                             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "restart");
                         }
                     }
-                }.runTaskTimer(this, 20, 20);
+                };
+                bkt.runTaskTimer(this, 20, 20);
+                this.rebootTaskID = bkt.getTaskId();
             } else if (cmd.getName().equalsIgnoreCase("cancelreboot")) {
                 if (!sender.hasPermission("reboot.use")) {
                     sender.sendMessage("You have no permission to execute this command.");
