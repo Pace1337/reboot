@@ -8,10 +8,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ResourceBundle;
+
 public final class Reboot extends JavaPlugin {
     public int rebootTaskID = 0;
     public boolean isRebooting = false;
-    public FileConfiguration config;
+    public static FileConfiguration config;
 
     @Override
     public void onEnable() {
