@@ -1,11 +1,12 @@
 name: RebootingPlugin
 version: ${project.version}
 main: dev.pace.reboot.Reboot
-api-version: 1.16
+api-version: 1.13
 authors: [ Pace ]
 commands:
   reboot:
     description: "Simple rebooting plugin for your server."
   cancelreboot:
-    description: "Cancel rebooting"
-
+    description: "Cancel rebooting."
+  rebootreload:
+    description: "Reloads plugin configuration."

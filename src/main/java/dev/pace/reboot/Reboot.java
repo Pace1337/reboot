@@ -1,6 +1,8 @@
 package dev.pace.reboot;
 
+import dev.pace.reboot.commands.RebootReload;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -8,16 +10,26 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ResourceBundle;
-
 public final class Reboot extends JavaPlugin {
     public int rebootTaskID = 0;
     public boolean isRebooting = false;
     public static FileConfiguration config;
+    public static Reboot instance = null;
+
+
+    public static Reboot getInstance() {
+        return instance;
+    }
+
+    public void reloadConfiguration() {
+        this.reloadConfig();
+        config = this.getConfig();
+    }
 
     @Override
     public void onEnable() {
-        // Configuration type
+        Reboot.instance = this;
+        getCommand("rebootreload").setExecutor(new RebootReload());
         Reboot.config = this.getConfig();
         Reboot.config.options().copyDefaults(true);
         this.saveConfig();
@@ -30,28 +42,23 @@ public final class Reboot extends JavaPlugin {
                 if (!sender.hasPermission("reboot.use")) {
                     sender.sendMessage("You have no permission to execute this command.");
                     return true;
-                    //  Permission check because some monkeys like me like to abuse
                 }
                 if (isRebooting) {
-                    sender.sendMessage("This server is already rebooting :), use /cancelreboot to cancel the reboot.");
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&',Reboot.config.getString("reboot.already_rebooting")));
                     // In case someone decides to spam the reboot command, stops them from doing it.
                     return false;
                 }
 
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "say "+Reboot.config.getString("message.reboot_message"));
+                Bukkit.broadcastMessage((ChatColor.translateAlternateColorCodes('&',Reboot.config.getString("reboot.highermessage"))));
                 BukkitRunnable bkt = new BukkitRunnable() {
                     int counter = 60;
-
                     public void run() {
                         isRebooting = true;
-                        
                         counter--;
                         if (counter == 50 || counter == 40 || counter == 30 || counter == 20 || counter == 10 || counter == 1) {
-                            Bukkit.broadcastMessage("Server Restarting in " + counter + " seconds!");
+                            Bukkit.broadcastMessage((ChatColor.translateAlternateColorCodes('&',Reboot.config.getString("reboot.lowermessage") + counter)));
                         }
-
                         if (counter == 0) {
-
                             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "restart");
                         }
                     }
@@ -62,13 +69,11 @@ public final class Reboot extends JavaPlugin {
                 if (!sender.hasPermission("reboot.use")) {
                     sender.sendMessage("You have no permission to execute this command.");
                     return true;
-                    //  Permission check because some monkeys like me like to abuse
                 }
-
                 if (isRebooting && rebootTaskID != 0) {
                     Bukkit.getScheduler().cancelTask(rebootTaskID);
                     isRebooting = false;
-                    sender.sendMessage(Reboot.config.getString("message.cancel_message"));
+                    sender.sendMessage((ChatColor.translateAlternateColorCodes('&',Reboot.config.getString("reboot.cancel_message"))));
                 }
             }
         }

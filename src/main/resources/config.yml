@@ -1,0 +1,11 @@
+# Automated reboot configuration.
+# Keep in mind that you may need to manually startup the server if you haven't setup the startup script in console.
+# Use /rebootreload to reload this configuration.
+# Higher message = Message displayed at 60 seconds counter.
+# Lower message = Message displayed at 50, 40, 30, 20, 10, 1 seconds counter.
+# Make sure there is a space at the end at lowermessage.
+reboot:
+  highermessage: "&cServer is rebooting in 60 seconds."
+  lowermessage: "&cSeconds until restart: "
+  cancel_message: "&cRebooting cancelled."
+  already_rebooting: "&cThis server is already rebooting :), use /cancelreboot to cancel the reboot."

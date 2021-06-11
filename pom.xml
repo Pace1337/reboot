@@ -9,14 +9,14 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>TestCommand</name>
+    <name>Reboot</name>
 
     <description>Rebooting command for your Bukkit/Spigot server.</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>yourmom.com</url>
+    <url>https://github.com/Pace1337</url>
 
     <build>
         <plugins>
